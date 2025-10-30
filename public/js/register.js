@@ -1,4 +1,4 @@
-const form = document.getElementById("loginForm");
+const form = document.getElementById("registerForm");
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -7,7 +7,7 @@ form.addEventListener("submit", async (event) => {
   const formDataObject = Object.fromEntries(formData.entries());
 
   try {
-    const response = await fetch("/login/validar", {
+    const response = await fetch("/register/salvar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formDataObject),
@@ -15,20 +15,17 @@ form.addEventListener("submit", async (event) => {
 
     const data = await response.json();
 
-    if (response.status === 201) {
+    if (response.ok) {
       Swal.fire({
         title: "Sucesso!",
-        text: `Usuário criado com sucesso: ${data.usuario.nome}`,
+        text: data.message,
         icon: "success",
-        confirmButtonText: "OK",
       });
-      form.reset();
     } else {
       Swal.fire({
         title: "Erro!",
-        text: data.error || "Erro ao criar usuário.",
+        text: data.error,
         icon: "error",
-        confirmButtonText: "OK",
       });
     }
   } catch (err) {
@@ -36,7 +33,6 @@ form.addEventListener("submit", async (event) => {
       title: "Erro!",
       text: `Erro: ${err.message}`,
       icon: "error",
-      confirmButtonText: "OK",
     });
   }
 });

@@ -5,95 +5,61 @@ import sequelize from "../config/database.js"; // Adicionar a importação para 
  * Cria um novo usuário.
  */
 export const criarUsuario = async (req, res) => {
+  const { nome, email, senha } = req.body;
+
   try {
-    const usuario = await Usuario.create(req.body);
-    res.status(201).json(usuario);
-  } catch (err) {
-    if (err.name === "SequelizeConnectionError") {
-      // Erro de conexão com o banco de dados
-      res.status(500).json({ error: "Erro de conexão com o banco de dados" });
-    } else if (err.name === "SequelizeValidationError") {
-      // Erro de validação
-      res.status(400).json({ error: "Erro de validação", details: err.errors });
-    } else {
-      // Outros erros
-      res
-        .status(500)
-        .json({ error: "Erro ao criar pergunta", details: err.message });
+    if (!nome || !email || !senha) {
+      return res.status(400).json({ error: "Preencha todos os campos!" });
     }
-  }
-};
 
-/**
- * Lista todas as perguntas.
- */
-export const listarPerguntas = async (req, res) => {
-  try {
-    const perguntas = await Pergunta.findAll();
-    res.status(200).json(perguntas);
-  } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Erro ao listar perguntas", details: err.message });
-  }
-};
-
-/**
- * Obtém uma pergunta específica pelo ID.
- */
-export const obterPergunta = async (req, res) => {
-  try {
-    const pergunta = await Pergunta.findByPk(req.params.id);
-    if (pergunta) {
-      res.status(200).json(pergunta);
-    } else {
-      res.status(404).json({ error: "Pergunta não encontrada" });
+    const usuarioExistente = await Usuario.findOne({ where: { email } });
+    if (usuarioExistente) {
+      return res.status(400).json({ error: "Usuário já cadastrado!" });
     }
-  } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Erro ao obter pergunta", details: err.message });
-  }
-};
 
-/**
- * Atualiza uma pergunta específica pelo ID.
- */
-export const atualizarPergunta = async (req, res) => {
-  try {
-    const [updated] = await Pergunta.update(req.body, {
-      where: { id: req.params.id },
+    const novoUsuario = await Usuario.create({ nome, email, senha });
+    return res.status(201).json({
+      message: "Usuário criado com sucesso!",
+      usuario: {
+        id: novoUsuario.id,
+        nome: novoUsuario.nome,
+        email: novoUsuario.email,
+      },
     });
-    if (updated) {
-      const pergunta = await Pergunta.findByPk(req.params.id);
-      res.status(200).json(pergunta);
-    } else {
-      res.status(404).json({ error: "Pergunta não encontrada" });
-    }
-  } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Erro ao atualizar pergunta", details: err.message });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Erro ao criar usuário." });
   }
 };
 
 /**
- * Deleta uma pergunta específica pelo ID usando SQL puro.
+ * Validar login do usuário.
  */
-export const deletarPergunta = async (req, res) => {
-  try {
-    const [results, metadata] = await sequelize.query(
-      "DELETE FROM Perguntas WHERE id = :id",
-      { replacements: { id: req.params.id }, type: sequelize.QueryTypes.DELETE }
-    );
-    if (metadata.affectedRows > 0) {
-      res.status(204).send();
-    } else {
-      res.status(404).json({ error: "Pergunta não encontrada" });
-    }
-  } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Erro ao deletar pergunta", details: err.message });
+export const validarUsuario = (req, res) => {
+  const { email, senha } = req.body;
+
+  if (!email || !senha) {
+    return res.status(400).json({ error: "Preencha todos os campos!" });
   }
+
+  const sql = `SELECT * FROM users WHERE email = ?`;
+  db.get(sql, [email], (err, user) => {
+    if (err) {
+      console.error(err);
+      return res.status(400).json({ error: 'Erro ao consultar usuário.' });
+    }
+
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+
+    // 🔒 Compara senha digitada com hash do banco
+    const senhaValida = bcrypt.compareSync(senha, user.senha);
+    if (!senhaValida) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+
+    // Login bem-sucedido
+    res.send(`Bem-vindo, ${user.nome}!`);
+  });
 };

@@ -1,12 +1,12 @@
 import express from 'express';
-import { criarUsuario } from '../controllers/UsuarioControllers.js';
+import { validarUsuario } from '../controllers/UsuarioControllers.js';
 
 const router = express.Router();
 
-router.get('/login', (req, res) => {
-  res.render('login.ejs');
+router.get("/", (req, res) => {
+  res.render("login", { page: "login" });
 });
 
-router.post('/salvar', criarUsuario);
+router.post("/validar", validarUsuario);
 
 export default router;

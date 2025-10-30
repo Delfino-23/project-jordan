@@ -3,16 +3,31 @@
   <section
     class="container my-5"
     style="max-width: 400px"
-    aria-labelledby="titulo-login"
+    aria-labelledby="titulo-register"
   >
-    <h2 id="titulo-login" class="mb-4 text-center">Login</h2>
-    <form class="needs-validation" id="loginForm" novalidate>
+    <h2 id="titulo-register" class="mb-4 text-center">register</h2>
+    <form class="needs-validation" id="registerForm" novalidate>
       <div class="mb-3">
-        <label for="loginEmail" class="form-label">E-mail</label>
+        <label for="registerUser" class="form-label">Usuario</label>
+        <input
+          type="text"
+          class="form-control"
+          id="registerUser"
+          name="nome"
+          placeholder="Seu nome de usuário"
+          required
+          autocomplete="username"
+          inputmode="text"
+        />
+        <div class="invalid-feedback">Por favor, insira um usuário válido.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="registerEmail" class="form-label">E-mail</label>
         <input
           type="email"
           class="form-control"
-          id="loginEmail"
+          id="registerEmail"
           name="email"
           placeholder="Seu e-mail"
           required
@@ -23,11 +38,11 @@
       </div>
 
       <div class="mb-3">
-        <label for="loginPassword" class="form-label">Senha</label>
+        <label for="registerPassword" class="form-label">Senha</label>
         <input
           type="password"
           class="form-control"
-          id="loginPassword"
+          id="registerPassword"
           name="senha"
           placeholder="Sua senha"
           required
@@ -40,15 +55,11 @@
         </div>
       </div>
 
-      <div class="mb-3">
-        <label>Não tem uma conta? <a href="/register">Cadastre-se</a></label>
-      </div>
-
       <button class="btn btn-warning w-100" type="submit">Entrar</button>
     </form>
   </section>
 </main>
-<script src="/js/login.js"></script>
+<script src="/js/register.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <%- include ('partials/footer.ejs') %>
