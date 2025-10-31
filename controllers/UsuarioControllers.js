@@ -1,7 +1,5 @@
 import Usuario from "../models/Usuario.js";
 import bcrypt from 'bcryptjs';
-// import jwt from 'jsonwebtoken';
-import sequelize from "../config/database.js"; // Adicionar a importação para sequelize
 
 /**
  * Cria um novo usuário.
@@ -10,7 +8,7 @@ export const criarUsuario = async (req, res) => {
   const { nome, email, senha } = req.body;
 
   try {
-    const hashedSenha = await bcrypt.hash(senha, 10); // Hash da senha
+    const hashedSenha = await bcrypt.hash(senha, 10);
 
     if (!nome || !email || !senha) {
       return res.status(400).json({ error: "Preencha todos os campos!" });
@@ -40,7 +38,6 @@ export const criarUsuario = async (req, res) => {
 /**
  * Validar login do usuário.
  */
-// exemplo no backend (Express)
 export const validarUsuario = async (req, res) => {
   try {
     const { email, senha } = req.body;
@@ -57,18 +54,13 @@ export const validarUsuario = async (req, res) => {
     const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
 
     if (!senhaCorreta) {
-      return res.status(401).json({ error: "Senha incorreta!" });
+      return res.status(401).json({ error: "Email ou senha incorreto!" });
     }
 
-    // const token = jwt.sign({ id: usuario.id, email: usuario.email }, SECRET_KEY, {
-    //         expiresIn: '1h' // O token expira em 1 hora
-    //     });
-        
-    // Login bem-sucedido
     return res.status(200).json({
       message: "Login realizado com sucesso!",
       usuario: { nome: usuario.nome, email: usuario.email },
-
+      
     });
   } catch (error) {
     console.error("Erro ao validar login:", error);
