@@ -15,10 +15,10 @@ form.addEventListener("submit", async (event) => {
 
     const data = await response.json();
 
-    if (response.status === 201) {
+    if (response.status === 200) {
       Swal.fire({
         title: "Sucesso!",
-        text: `Usuário criado com sucesso: ${data.usuario.nome}`,
+        text: `Login realizado com sucesso: ${data.usuario.nome}`,
         icon: "success",
         confirmButtonText: "OK",
       });
