@@ -14,8 +14,8 @@ video.addEventListener("timeupdate", () => {
   }
 });
 
-// Máscara para telefone
-document.getElementById('telefone').addEventListener('input', function(e) {
+// Máscara para tel
+document.getElementById('tel').addEventListener('input', function(e) {
   let v = e.target.value.replace(/\D/g, '');
   if (v.length > 11) v = v.slice(0, 11);
   if (v.length >= 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
@@ -75,45 +75,69 @@ document.getElementById('cpf').addEventListener('input', function(e) {
 });
 
 // Validação Bootstrap + CPF
-document.getElementById('formAulaExperimental').addEventListener('submit', function(event) {
+const form = document.getElementById('formAulaExperimental')
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  
   const cpfInput = document.getElementById('cpf');
   const cpfValue = cpfInput.value;
 
-  if (!validaCPF(cpfValue)) {
-    cpfInput.classList.add('is-invalid');
-    event.preventDefault();
-    event.stopPropagation();
-  } else {
-    cpfInput.classList.remove('is-invalid');
-  }
+  const formData = new FormData(form);
+  const formDataObject = Object.fromEntries(formData.entries());
 
-  if (!this.checkValidity()) {
-    event.preventDefault();
-    event.stopPropagation();
+  try {
+    const response = await fetch("/criarAluno", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formDataObject),
+    });
+    const data = await response.json();
+    if (response.status === 201) {
+      Swal.fire({
+        title: "Sucesso!",
+        text: `Aluno criado com sucesso: ${data.aluno.nome}`,
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+      form.reset();
+    } else {
+      Swal.fire({
+        title: "Erro!",
+        text: data.error || "Erro ao criar aluno.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  } catch (err) {
+    Swal.fire({
+      title: "Erro!",
+      text: `Erro: ${err.message}`,
+      icon: "error",
+      confirmButtonText: "OK",
+    });
   }
-  this.classList.add('was-validated');
 });
 
 // Feedback com Toast para agendamento de aula experimental
-document.getElementById('formAulaExperimental').addEventListener('submit', function(event) {
-  event.preventDefault();
-  event.stopPropagation();
+// document.getElementById('formAulaExperimental').addEventListener('submit', function(event) {
+//   event.preventDefault();
+//   event.stopPropagation();
 
-  // Aqui você pode validar o CPF ou outros campos
-  if (this.checkValidity()) {
-    document.getElementById('agendarToastMsg').textContent = 'Aula experimental agendada com sucesso!';
-    const toastEl = document.getElementById('agendarToast');
-    toastEl.classList.remove('text-bg-danger');
-    toastEl.classList.add('text-bg-primary');
-    bootstrap.Toast.getOrCreateInstance(toastEl).show();
-    this.reset();
-    this.classList.remove('was-validated');
-  } else {
-    document.getElementById('agendarToastMsg').textContent = 'Preencha corretamente os campos obrigatórios!';
-    const toastEl = document.getElementById('agendarToast');
-    toastEl.classList.remove('text-bg-primary');
-    toastEl.classList.add('text-bg-danger');
-    bootstrap.Toast.getOrCreateInstance(toastEl).show();
-    this.classList.add('was-validated');
-  }
-});
+//   // Aqui você pode validar o CPF ou outros campos
+//   if (this.checkValidity()) {
+//     document.getElementById('agendarToastMsg').textContent = 'Aula experimental agendada com sucesso!';
+//     const toastEl = document.getElementById('agendarToast');
+//     toastEl.classList.remove('text-bg-danger');
+//     toastEl.classList.add('text-bg-primary');
+//     bootstrap.Toast.getOrCreateInstance(toastEl).show();
+//     this.reset();
+//     this.classList.remove('was-validated');
+//   } else {
+//     document.getElementById('agendarToastMsg').textContent = 'Preencha corretamente os campos obrigatórios!';
+//     const toastEl = document.getElementById('agendarToast');
+//     toastEl.classList.remove('text-bg-primary');
+//     toastEl.classList.add('text-bg-danger');
+//     bootstrap.Toast.getOrCreateInstance(toastEl).show();
+//     this.classList.add('was-validated');
+//   }
+// });

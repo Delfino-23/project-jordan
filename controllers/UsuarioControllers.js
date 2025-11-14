@@ -1,3 +1,4 @@
+import { render } from "ejs";
 import Usuario from "../models/Usuario.js";
 import bcrypt from 'bcryptjs';
 
@@ -26,9 +27,8 @@ export const criarUsuario = async (req, res) => {
         id: novoUsuario.id,
         nome: novoUsuario.nome,
         email: novoUsuario.email,
-
       },
-    });
+    })
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao criar usuário." });
