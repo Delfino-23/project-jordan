@@ -1,0 +1,369 @@
+<%- include('partials/header.ejs') -%>
+    <%- include('partials/navbar.ejs') -%>
+    <main>
+      <!-- Banner -->
+      <div>
+        <div class="ratio ratio-16x9">
+          <video autoplay muted loop id="meuVideo">
+            <source src="/video/banner-jordan_class.mp4" type="video/mp4" />
+            <track
+              kind="captions"
+              src="/video/captions.vtt"
+              srclang="pt"
+              label="Português"
+            />
+            Seu navegador não suporta vídeo.
+          </video>
+        </div>
+      </div>
+
+      <!-- História -->
+      <section class="historia" aria-labelledby="titulo-historia">
+        <div class="texto">
+          <h2 id="titulo-historia" class="titulo-historia">
+            História: Como surgiu?
+          </h2>
+          <p>
+            O Street Dance, ou Dança Urbana, tem origem nos Estados Unidos, nos
+            anos 70, como parte do movimento Hip Hop, surgido nos guetos
+            afro‐americanos.
+          </p>
+
+          <p>
+            No Brasil, o movimento começou a ganhar corpo nos anos 70 e 80,
+            através dos bailes black e da cultura jovem urbana. Locais como São
+            Paulo, Rio de Janeiro, Salvador e Brasília foram fundamentais para
+            essa difusão.
+          </p>
+
+          <p>
+            A Estação São Bento, em São Paulo, tornou-se um ponto simbólico: nos
+            anos 80 e início dos 90 havia encontros, batalhas e apresentações
+            que ajudaram o Hip Hop e suas danças de rua a se tornarem mais
+            visíveis no Brasil.
+          </p>
+
+          <h3 class="subtitulo-historia">
+            Como são trabalhados alguns estilos
+          </h3>
+          <ul>
+            <li>
+              <strong>Waacking / Punking:</strong> destaca expressão e
+              movimentos rápidos de braços.
+            </li>
+            <li>
+              <strong>Popping:</strong> foca em contrações musculares para criar
+              efeitos de estalos.
+            </li>
+            <li>
+              <strong>Waving:</strong> trabalha fluidez e ondulações pelo corpo.
+            </li>
+            <li>
+              <strong>House Dance:</strong> desenvolve footwork ágil e
+              improvisação.
+            </li>
+            <li>
+              <strong>Krump:</strong> explora intensidade, energia e emoção.
+            </li>
+            <li>
+              <strong>Breaking:</strong> mistura força, acrobacias e movimentos
+              de chão, sendo um dos pilares do Hip Hop e o estilo que mais
+              marcou a chegada do Street Dance no Brasil.
+            </li>
+            <li>
+              <strong>Tutting:</strong> utiliza linhas e ângulos precisos com
+              braços e mãos, criando formas geométricas e visuais marcantes.
+            </li>
+          </ul>
+        </div>
+
+        <!-- imagens -->
+        <div class="imagem-historia">
+          <img
+            src="/img/HistoriaFoto01.jpg"
+            alt="Alunos praticando dança urbana na escola Jordan Class"
+          />
+          <img
+            src="/img/HistoriaFoto02.jpg"
+            alt="Apresentação de dança urbana realizada pela escola Jordan Class"
+          />
+        </div>
+      </section>
+
+      <!-- Curso -->
+      <section class="curso" id="curso" aria-labelledby="titulo-curso">
+        <!-- imagens -->
+        <div class="imagem-curso">
+          <img
+            src="/img/PrimeiraFoto(sobreOCurso).jpg"
+            alt="Turma de alunos durante aula de Hip Hop na Jordan Class"
+          />
+          <img
+            src="/img/SegundaFoto(sobreOCurso).jpg"
+            alt="Instrutor demonstrando movimentos de dança urbana para os alunos"
+          />
+        </div>
+
+        <div class="texto">
+          <h2 id="titulo-curso" class="titulo-curso">Sobre o Curso</h2>
+          <p>
+            As aulas do Jordan Class têm como foco principal o Hip Hop,
+            explorando suas bases, grooves e musicalidade para que cada aluno
+            desenvolva seu estilo próprio dentro da dança. Além disso, já foram
+            trabalhados em sala movimentos e referências de outras modalidades
+            das danças urbanas, como Waacking/Punking, Popping, Waving, House
+            Dance e até elementos do Krump, ampliando o repertório e a vivência
+            cultural dos participantes.
+          </p>
+
+          <p>
+            É uma proposta que vai além da coreografia, incentivando a
+            consciência corporal, a expressão individual e a parceria dentro da
+            turma, onde todos se desafiam e aprendem juntos, fortalecendo a
+            conexão com a essência das danças urbanas.
+          </p>
+        </div>
+      </section>
+
+      <!-- Benefícios -->
+      <section
+        class="cards-beneficios"
+        id="beneficios"
+        aria-labelledby="titulo-beneficios"
+      >
+        <h2 id="titulo-beneficios" class="titulo-beneficios">Benefícios</h2>
+
+        <div class="cards-container">
+          <!-- card 1 -->
+          <div class="card-content">
+            <div class="card-header">
+              <img
+                src="/img/person-running-solid-full.svg"
+                alt="Ícone de pessoa correndo"
+                class="icon-beneficios"
+              />
+              <h3 class="card-title">Consciência Corporal</h3>
+            </div>
+            <div class="card-body">
+              <p>
+                Danças urbanas ajudam a desenvolver a consciência corporal,
+                permitindo que os dançarinos se conectem melhor com seus
+                movimentos.
+              </p>
+            </div>
+          </div>
+
+          <!-- card 2 -->
+          <div class="card-content">
+            <div class="card-header">
+              <img
+                src="/img/heart-pulse-solid-full.svg"
+                alt="Ícone de coração pulsando"
+                class="icon-beneficios"
+              />
+              <h3 class="card-title">Condicionamento Físico/Resistência​</h3>
+            </div>
+            <div class="card-body">
+              <p>
+                As danças urbanas são uma excelente forma de melhorar a
+                resistência e o condicionamento físico.
+              </p>
+            </div>
+          </div>
+
+          <!-- card 3 -->
+          <div class="card-content">
+            <div class="card-header">
+              <img
+                src="/img/arrow-trend-up-solid-full.svg"
+                alt="Ícone de gráfico em tendência crescente"
+                class="icon-beneficios"
+              />
+              <h3 class="card-title">
+                Melhora na agilidade e coordenação motora
+              </h3>
+            </div>
+            <div class="card-body">
+              <p>
+                As danças urbanas aprimoram a agilidade e a rapidez dos
+                movimentos.
+              </p>
+            </div>
+          </div>
+
+          <!-- card 4 -->
+          <div class="card-content">
+            <div class="card-header">
+              <img
+                src="/img/brain-solid-full.svg"
+                alt="Ícone de cérebro"
+                class="icon-beneficios"
+              />
+              <h3 class="card-title">Memorização</h3>
+            </div>
+            <div class="card-body">
+              <p>
+                Os dançarinos precisam memorizar coreografias, aprimorando suas
+                habilidades de memorização.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Professor -->
+      <section
+        class="sobre-professor"
+        id="professor"
+        aria-labelledby="titulo-professor"
+      >
+        <div class="image-professor">
+          <img
+            src="/img/QuemEnsina.jpg"
+            alt="Professor Jordan, instrutor de dança urbana na Jordan Class"
+            class="img-fluid"
+          />
+        </div>
+
+        <div class="texto">
+          <h2 id="titulo-professor" class="titulo-professor">
+            Sobre o Professor
+          </h2>
+          <p>
+            A jornada do Jordan na dança nunca foi fácil, mas a paixão sempre o
+            manteve firme. Formado em Educação Física, ele se especializou em
+            diferentes estilos ao longo dos anos, acumulando experiências que
+            vão do ballet, jazz e contemporâneo até as danças urbanas, que hoje
+            são seu foco principal.
+          </p>
+
+          <p>
+            Jordan chegou a fundar a Academia Duais, mas depois migrou para dar
+            aulas na Sol Escola de Dança e também participa do grupo de
+            competições de Campinas, PHK. Atualmente, é diretor do ICA, onde
+            ajuda crianças a descobrirem e desenvolverem seu potencial através
+            da dança.
+          </p>
+
+          <p>
+            Ele adora se desafiar em batalhas de improviso e explorar novas
+            possibilidades dentro do Hip Hop e estilos relacionados. Além disso,
+            gosta de desafiar seus alunos, levando-os para competições e
+            propondo sequências mais complexas nas aulas, ajudando cada um a
+            evoluir e encaixar os movimentos dentro do seu próprio estilo.
+          </p>
+        </div>
+      </section>
+
+      <!-- Form Aula Grátis -->
+      <section class="aula-gratis my-5" aria-labelledby="titulo-aula-gratis">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <h2 id="titulo-aula-gratis" class="mb-3 title-aula-gratis">
+                Faça uma aula <strong class="highlight-text">GRÁTIS</strong>
+              </h2>
+              <p>
+                Nossa aula experimental é a oportunidade perfeita para você se
+                familiarizar com o mundo da dança sem qualquer compromisso.
+              </p>
+              <p>
+                Você poderá experimentar diferentes estilos de dança, aprender
+                alguns passos básicos e ver como é divertido e gratificante
+                dançar.
+              </p>
+              <p>
+                Preencha o formulário abaixo para agendar sua aula experimental
+                e conhecer o mundo da dança sem compromisso!
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <div class="p-4 bg-white rounded shadow">
+                <form
+                  id="formAulaExperimental"
+                  class="needs-validation"
+                  novalidate
+                >
+                  <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nome"
+                      name="nome"
+                      placeholder="Seu nome"
+                      required
+                      autocomplete="name"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      name="email"
+                      placeholder="Seu e-mail"
+                      required
+                      autocomplete="email"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="telefone" class="form-label">Telefone</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="tel"
+                      name="tel"
+                      placeholder="(99) 99999-9999"
+                      maxlength="15"
+                      pattern="\(\d{2}\) \d{4,5}-\d{4,5}"
+                      required
+                      inputmode="numeric"
+                    />
+                    <div class="invalid-feedback">
+                      Por favor, insira um telefone válido no formato (99)
+                      99999-9999.
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="cpf" class="form-label"
+                      >CPF <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="cpf"
+                      name="cpf"
+                      placeholder="000.000.000-00"
+                      required
+                      maxlength="14"
+                      pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}"
+                      inputmode="numeric"
+                    />
+                    <div class="invalid-feedback">
+                      Por favor, insira um CPF válido no formato 000.000.000-00.
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn w-100"
+                    style="
+                      background: linear-gradient(90deg, #e91e63, #ff8800);
+                      color: #fff;
+                      font-weight: bold;
+                    "
+                  >
+                    Agendar Aula Experimental
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="/js/home.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<%- include('partials/footer.ejs') -%>
