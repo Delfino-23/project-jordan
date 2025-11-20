@@ -4,19 +4,21 @@ import homeRoutes from "./routes/home.js";
 import loginRoutes from "./routes/login.js";
 import registerRoutes from "./routes/register.js";
 import sequelize from "./config/database.js";
+import { fileURLToPath } from "url";
+import path from "path";
+
+// 👇 Solução para usar __dirname com ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
+// Configura EJS
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "../src/views"));
 
-app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
-
-app.use("/css", express.static("./node_modules/bootstrap/dist/css"));
-app.use("/js", express.static("./node_modules/bootstrap/dist/js"));
-
-app.use(bodyParser.urlencoded({ extended: true })); 
-app.use(bodyParser.json());
+// Serve arquivos JS gerados
+app.use(express.static(path.resolve(__dirname, "public")));
 
 app.use("/", homeRoutes);
 app.use("/login", loginRoutes);
