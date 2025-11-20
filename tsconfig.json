@@ -1,14 +1,25 @@
 {
+  // "compilerOptions": {
+  //   "target": "ES2020", // Output moderno
+  //   "module": "ESNext", // Gera ES Modules
+  //   "moduleResolution": "node",
+  //   "outDir": "./dist", // Pasta de build
+  //   "rootDir": "./src", // Fonte em TS
+  //   "strict": true,
+  //   "esModuleInterop": true, // Import default de libs CommonJS
+  //   "forceConsistentCasingInFileNames": true,
+  //   "skipLibCheck": true
+  // },
   "compilerOptions": {
-    "target": "ES2020", // Output moderno
-    "module": "ESNext", // Gera ES Modules
-    "moduleResolution": "node",
-    "outDir": "./dist", // Pasta de build
-    "rootDir": "./src", // Fonte em TS
+    "target": "ES2021",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "strict": true,
-    "esModuleInterop": true, // Import default de libs CommonJS
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "outDir": "dist"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
