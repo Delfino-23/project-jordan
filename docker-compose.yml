@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: project-jordan
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./banco.db:/app/banco.db
+    environment:
+      - NODE_ENV=production
+    command: ["node", "dist/app.js"]

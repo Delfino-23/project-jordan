@@ -1,5 +1,6 @@
 import Usuario from "../models/Usuario.js";
 import bcrypt from 'bcryptjs';
+import { gerarToken } from '../middleware/authMiddleware.js';
 /**
  * Cria um novo usuário.
  */
@@ -46,9 +47,11 @@ export const validarUsuario = async (req, res) => {
         if (!senhaCorreta) {
             return res.status(401).json({ error: "Email ou senha incorreto!" });
         }
+        const token = gerarToken(usuario.id, usuario.email, usuario.nome);
         return res.status(200).json({
             message: "Login realizado com sucesso!",
-            usuario: { nome: usuario.nome, email: usuario.email },
+            token,
+            usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email },
         });
     }
     catch (error) {

@@ -5,6 +5,8 @@ import registerRoutes from "./routes/register.js";
 import sequelize from "./config/database.js";
 import { fileURLToPath } from "url";
 import path from "path";
+import dotenv from 'dotenv';
+dotenv.config();
 // 👇 Solução para usar __dirname com ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
