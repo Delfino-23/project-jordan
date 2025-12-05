@@ -35,6 +35,19 @@ jest.mock("jsonwebtoken", () => ({
   verify: jest.fn(),
 }));
 
+// Mock do logger
+jest.mock("../utils/logger.js", () => {
+  return {
+    __esModule: true,
+    default: {
+      error: jest.fn(),
+      warn: jest.fn(),
+      info: jest.fn(),
+      debug: jest.fn(),
+    },
+  };
+});
+
 describe("Testes de Controllers e Middleware", () => {
   
   beforeEach(() => {
@@ -224,12 +237,7 @@ describe("Testes de Controllers e Middleware", () => {
 
       expect(mockRes.status).toHaveBeenCalledWith(201);
       expect(mockRes.json).toHaveBeenCalledWith({
-        message: "Usuário criado com sucesso!",
-        usuario: {
-          id: 1,
-          nome: "João",
-          email: "joao@teste.com",
-        },
+        message: "Usuário criado com sucesso! Agora faça login.",
       });
     });
 

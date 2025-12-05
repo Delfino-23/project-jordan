@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import Usuario from "../models/Usuario.js";
 import bcrypt from 'bcryptjs';
 import { gerarToken } from '../middleware/authMiddleware.js';
+import { validarCamposObrigatorios } from '../utils/validators.js';
+import logger from '../utils/logger.js';
 
 /**
  * Cria um novo usuário.
@@ -10,11 +12,16 @@ export const criarUsuario = async (req: Request, res: Response) => {
   const { nome, email, senha } = req.body;
 
   try {
-    const hashedSenha = await bcrypt.hash(senha, 10);
+    const validacaoErro = validarCamposObrigatorios(
+      { nome, email, senha },
+      ['nome', 'email', 'senha']
+    );
 
-    if (!nome || !email || !senha) {
-      return res.status(400).json({ error: "Preencha todos os campos!" });
+    if (validacaoErro) {
+      return res.status(400).json({ error: validacaoErro });
     }
+
+    const hashedSenha = await bcrypt.hash(senha, 10);
 
     const usuarioExistente = await Usuario.findOne({ where: { email } });
     if (usuarioExistente) {
@@ -22,16 +29,12 @@ export const criarUsuario = async (req: Request, res: Response) => {
     }
 
     const novoUsuario = await Usuario.create({ nome, email, senha: hashedSenha });
+
     return res.status(201).json({
-      message: "Usuário criado com sucesso!",
-      usuario: {
-        id: novoUsuario.id,
-        nome: novoUsuario.nome,
-        email: novoUsuario.email,
-      },
-    })
+      message: "Usuário criado com sucesso! Agora faça login.",
+    });
   } catch (error) {
-    console.error(error);
+    logger.error("Erro ao criar usuário", error);
     return res.status(500).json({ error: "Erro ao criar usuário." });
   }
 };
@@ -43,8 +46,13 @@ export const validarUsuario = async (req: Request, res: Response) => {
   try {
     const { email, senha } = req.body;
 
-    if (!email || !senha) {
-      return res.status(400).json({ error: "Preencha todos os campos!" });
+    const validacaoErro = validarCamposObrigatorios(
+      { email, senha },
+      ['email', 'senha']
+    );
+
+    if (validacaoErro) {
+      return res.status(400).json({ error: validacaoErro });
     }
 
     const usuario = await Usuario.findOne({ where: { email } });
@@ -66,7 +74,7 @@ export const validarUsuario = async (req: Request, res: Response) => {
       usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email },
     });
   } catch (error) {
-    console.error("Erro ao validar login:", error);
+    logger.error("Erro ao validar login", error);
     return res.status(500).json({ error: "Erro interno do servidor" });
   }
 };

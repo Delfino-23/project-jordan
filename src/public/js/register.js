@@ -20,7 +20,12 @@ form.addEventListener("submit", async (event) => {
         title: "Sucesso!",
         text: data.message,
         icon: "success",
+      }).then(() => {
+        // Redirecionar para login
+        window.location.href = "/login";
       });
+
+      form.reset();
     } else {
       Swal.fire({
         title: "Erro!",

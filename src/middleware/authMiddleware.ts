@@ -58,3 +58,34 @@ export const verificarToken = (req: Request, res: Response, next: NextFunction):
     res.status(401).json({ error: 'Token inválido ou expirado!' });
   }
 };
+
+/**
+ * Middleware para redirecionar usuários já autenticados para a página principal
+ */
+export const redirecionarSeAutenticado = (req: Request, res: Response, next: NextFunction): void => {
+  const token = req.headers.authorization?.split(' ')[1] || req.cookies?.token;
+
+  if (token) {
+    try {
+      jwt.verify(token, JWT_SECRET);
+      // Token válido, redirecionar para home
+      res.redirect('/');
+      return;
+    } catch (error) {
+      // Token inválido, continuar normalmente
+      next();
+    }
+  } else {
+    // Sem token, continuar normalmente
+    next();
+  }
+};
+
+/**
+ * Middleware para adicionar token ao header Authorization (para renderização de páginas)
+ * Nota: Este middleware funciona com tokens passados via localStorage pelo cliente
+ */
+export const verificarTokenPagina = (req: Request, res: Response, next: NextFunction): void => {
+  // Renderizar página mesmo sem token (token será validado no frontend)
+  next();
+};
