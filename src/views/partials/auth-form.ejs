@@ -1,0 +1,71 @@
+<main>
+  <section
+    class="container my-5"
+    style="max-width: 400px"
+    aria-labelledby="titulo-auth"
+  >
+    <h2 id="titulo-auth" class="mb-4 text-center"><%= title %></h2>
+
+    <form class="needs-validation" id="<%= formId %>" method="POST" action="<%= action %>" novalidate>
+      <% if (showName) { %>
+        <div class="mb-3">
+          <label for="registerUser" class="form-label">Nome</label>
+          <input
+            type="text"
+            class="form-control"
+            id="registerUser"
+            name="nome"
+            placeholder="Seu nome completo"
+            required
+            autocomplete="name"
+            inputmode="text"
+          />
+          <div class="invalid-feedback">Por favor, insira um nome válido.</div>
+        </div>
+      <% } %>
+
+      <div class="mb-3">
+        <label for="authEmail" class="form-label">E-mail</label>
+        <input
+          type="email"
+          class="form-control"
+          id="authEmail"
+          name="email"
+          placeholder="Seu e-mail"
+          required
+          autocomplete="email"
+          inputmode="email"
+        />
+        <div class="invalid-feedback">Por favor, insira um e-mail válido.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="authPassword" class="form-label">Senha</label>
+        <input
+          type="password"
+          class="form-control"
+          id="authPassword"
+          name="senha"
+          placeholder="Sua senha"
+          required
+          autocomplete="current-password"
+          minlength="5"
+          inputmode="text"
+        />
+        <div class="invalid-feedback">
+          Por favor, insira sua senha (mínimo 5 caracteres).
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label><%= altText %> <a href="<%= altHref %>"><%= altLinkText %></a></label>
+      </div>
+
+      <button class="btn btn-warning w-100" type="submit"><%= submitText %></button>
+    </form>
+  </section>
+</main>
+<% if (script) { %>
+  <script src="<%= script %>"></script>
+<% } %>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

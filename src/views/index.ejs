@@ -134,80 +134,41 @@
         <h2 id="titulo-beneficios" class="titulo-beneficios">Benefícios</h2>
 
         <div class="cards-container">
-          <!-- card 1 -->
-          <div class="card-content">
-            <div class="card-header">
-              <img
-                src="/img/person-running-solid-full.svg"
-                alt="Ícone de pessoa correndo"
-                class="icon-beneficios"
-              />
-              <h3 class="card-title">Consciência Corporal</h3>
-            </div>
-            <div class="card-body">
-              <p>
-                Danças urbanas ajudam a desenvolver a consciência corporal,
-                permitindo que os dançarinos se conectem melhor com seus
-                movimentos.
-              </p>
-            </div>
-          </div>
-
-          <!-- card 2 -->
-          <div class="card-content">
-            <div class="card-header">
-              <img
-                src="/img/heart-pulse-solid-full.svg"
-                alt="Ícone de coração pulsando"
-                class="icon-beneficios"
-              />
-              <h3 class="card-title">Condicionamento Físico/Resistência​</h3>
-            </div>
-            <div class="card-body">
-              <p>
-                As danças urbanas são uma excelente forma de melhorar a
-                resistência e o condicionamento físico.
-              </p>
-            </div>
-          </div>
-
-          <!-- card 3 -->
-          <div class="card-content">
-            <div class="card-header">
-              <img
-                src="/img/arrow-trend-up-solid-full.svg"
-                alt="Ícone de gráfico em tendência crescente"
-                class="icon-beneficios"
-              />
-              <h3 class="card-title">
-                Melhora na agilidade e coordenação motora
-              </h3>
-            </div>
-            <div class="card-body">
-              <p>
-                As danças urbanas aprimoram a agilidade e a rapidez dos
-                movimentos.
-              </p>
-            </div>
-          </div>
-
-          <!-- card 4 -->
-          <div class="card-content">
-            <div class="card-header">
-              <img
-                src="/img/brain-solid-full.svg"
-                alt="Ícone de cérebro"
-                class="icon-beneficios"
-              />
-              <h3 class="card-title">Memorização</h3>
-            </div>
-            <div class="card-body">
-              <p>
-                Os dançarinos precisam memorizar coreografias, aprimorando suas
-                habilidades de memorização.
-              </p>
-            </div>
-          </div>
+          <% const beneficios = [
+            {
+              icon: '/img/person-running-solid-full.svg',
+              iconAlt: 'Ícone de pessoa correndo',
+              title: 'Consciência Corporal',
+              description: 'Danças urbanas ajudam a desenvolver a consciência corporal, permitindo que os dançarinos se conectem melhor com seus movimentos.'
+            },
+            {
+              icon: '/img/heart-pulse-solid-full.svg',
+              iconAlt: 'Ícone de coração pulsando',
+              title: 'Condicionamento Físico/Resistência',
+              description: 'As danças urbanas são uma excelente forma de melhorar a resistência e o condicionamento físico.'
+            },
+            {
+              icon: '/img/arrow-trend-up-solid-full.svg',
+              iconAlt: 'Ícone de gráfico em tendência crescente',
+              title: 'Melhora na agilidade e coordenação motora',
+              description: 'As danças urbanas aprimoram a agilidade e a rapidez dos movimentos.'
+            },
+            {
+              icon: '/img/brain-solid-full.svg',
+              iconAlt: 'Ícone de cérebro',
+              title: 'Memorização',
+              description: 'Os dançarinos precisam memorizar coreografias, aprimorando suas habilidades de memorização.'
+            }
+          ];
+          %>
+          <% beneficios.forEach(beneficio => { %>
+            <%- include('partials/benefit-card.ejs', { 
+              icon: beneficio.icon,
+              iconAlt: beneficio.iconAlt,
+              title: beneficio.title,
+              description: beneficio.description
+            }) %>
+          <% }); %>
         </div>
       </section>
 
